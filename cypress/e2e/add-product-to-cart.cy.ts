@@ -1,7 +1,9 @@
 describe('add product to cart', () => {
-  it('should be ablle to navigate to the product page and add it to the cart', () => {
-    cy.visit('http://localhost:3000')
+  beforeEach(() => {
+    cy.visit('/')
+  })
 
+  it('should be ablle to navigate to the product page and add it to the cart', () => {
     cy.get('a[href^="/product/"]').first().click()
 
     cy.url().should('include', '/product/')
@@ -12,8 +14,6 @@ describe('add product to cart', () => {
   })
 
   it('should not count duplicated products on cart', () => {
-    cy.visit('http://localhost:3000')
-
     cy.get('a[href^="/product/"]').first().click()
 
     cy.url().should('include', '/product/')
@@ -24,10 +24,8 @@ describe('add product to cart', () => {
     cy.contains('Carrinho (1)').should('exist')
   })
 
-  it('should be able to searcgh for a product and add it to the cart', () => {
-    cy.visit('http://localhost:3000')
-
-    cy.get('input[name=q]').type('camiseta').parent().submit()
+  it('should be able to search for a product and add it to the cart', () => {
+    cy.get('input[name=q]').type('camiseta').parent('form').submit()
 
     cy.get('a[href^="/product/"]').first().click()
 
