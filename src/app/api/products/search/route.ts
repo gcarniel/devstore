@@ -8,8 +8,6 @@ export async function GET(request: NextRequest) {
 
   const { searchParams } = request.nextUrl
 
-  console.log(searchParams)
-
   const query = z.string().parse(searchParams.get('q'))
 
   const products = data.products.filter((product) =>
